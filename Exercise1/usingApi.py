@@ -33,11 +33,9 @@ def createRecord(name,salary,age):
     action = requests.post(record_src,json=record_Json, headers=headers)
     print(action.status_code) #code: 200 means 'success'
     print(action.text)
+    print(f'Your user id is: {json.loads(action.text)["data"]["id"]}')
 
-
-#--------Useful functions for Answering Questions----- 
-
-#4) How many employees earn more than ___ ? 
+# 4) How many employees earn more than ___ ? 
 def queryEmployeesBySalary(salary):
    #creating a counter of those employees who satisfy the specification
     count_employees = 0
@@ -46,10 +44,23 @@ def queryEmployeesBySalary(salary):
            count_employees+=1
     print(f'No. Employees earning more than {salary} is: {count_employees}')
 
-#5)
-
 #Testing Area
 #print(getEmployees())
 #print(getEmployee(1))
 #createRecord('carlosLeon',5000,100)
-queryEmployeesBySalary(300000) #Ans: 11
+#queryEmployeesBySalary(300000) #Ans: 11
+
+if __name__ == '__main__':
+    #Answering Questions: 
+    status = False
+    while(not status):
+        option = int(input('What would you like to know (input number)? \n 1. How many employees earn more than $300,000.00? \n 2. Create a record with your name and know its id \n 3.exit \n'))
+        if(option >2):
+            status = True
+            break
+        else:
+            if (option == 1 ):
+                queryEmployeesBySalary(300000) #Ans: 11
+            if (option == 2):
+                createRecord('carlosLeon',5000,100)
+
