@@ -44,9 +44,9 @@ def queryEmployeesBySalary(salary):
     for i in getEmployees()['data']:
         if(int(i['employee_salary']) > int(salary)):
            count_employees+=1
-    print(count_employees)
+    print(f'No. Employees earning more than {salary} is: {count_employees}')
 
-
+#5)
 
 #Testing Area
 #print(getEmployees())
