@@ -24,9 +24,17 @@ def getEmployee(id):
     return json.loads(requests.get(employee_src, headers=headers).text)
 
 
-
-
+#3) Adding a record
+def createRecord(name,salary,age):
+    symbol= '"'
+    #routing
+    record_src = 'https://dummy.restapiexample.com/api/v1/create'
+    record_Json = {"name": symbol+str(name)+symbol,"salary":symbol+str(salary)+symbol,"age":symbol+str(age)+symbol}
+    action = requests.post(record_src,json=record_Json, headers=headers)
+    print(action.status_code)
+    print(action.text)
 
 #Testing Area
-#print(getEmployees())
-print(getEmployee(1))
+print(getEmployees())
+#print(getEmployee(1))
+#createRecord('carlosLeon',5000,100)
