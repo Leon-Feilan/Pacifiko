@@ -46,7 +46,7 @@ soldList=[
 
 def productSearchByName(name):
     for i in productsList:
-        if i['product_name'] == str(name):
+        if i['product_name'].upper() == str(name).upper():
             print(f'Product: {name}  Price: {i["price"]}')
             return
     print('Sorry, Product not found')
@@ -88,5 +88,41 @@ def addItemToCart(product_id, quantity):
     soldList.append({'product_id': int(product_id), 'quantity': int(quantity)}) #adding to Sold List
 
 
+#------Interface ---------------
+
+def buying_UI():
+    exit = False
+    print(f'Welcome to Pricesmart! These are our products: \n {productsList}')
+    while(not exit):
+        option = int(input('(insert number)\t 1. Would you like to buy? \t 2. No \n'))
+        if(option!=1):
+            exit = True
+            return
+        id = int(input('Insert product Id for buying: '))
+        quantity = int(input('How many of them? '))
+        addItemToCart(id,quantity)
+
+def main_UI():
+    exit = False
+    while(not exit):
+        option = int(input('What would you like to do? (insert number) \n 1.Buying Stuff (The cart initially is empty) \n 2. Product Search \n 3.Cart Total \n 4. Discount Calculation \n 5.Show Top N Selling Products \n 6. exit\n'))
+        if(option>5):
+            print('Bye!')
+            exit=True
+            return
+        else:
+            if(option==1):
+                buying_UI()
+            elif(option==2):
+                productSearchByName(input('what is the product name? '))
+            elif(option==3):
+                print(f'Total of Cart is: {getCartTotal()}')
+            elif(option==4):
+                 print(f'Total of Discount Calculation is: {getDiscountCalculation()}')
+            else:
+                n = int(input('How many Top elements you want to display?'))
+                print(f'The top {n} selling elements are: {getTopSellingProducts(n)}')
 
 
+if __name__ == "__main__":
+    main_UI()
