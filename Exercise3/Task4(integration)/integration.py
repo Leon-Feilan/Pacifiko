@@ -16,14 +16,18 @@ connection = pyodbc.connect(
 
 
 def getProductList():
-    data = pd.read_sql_query("SELECT * FROM dbo.Products", connection)
+    data = pd.read_sql_query("SELECT Product_name, Stock_quantity FROM dbo.Products", connection)
     print(data)
 
 
 def getProductByName(name):
-    pass
+    statement = "SELECT * From dbo.Products WHERE Product_name ="+"'"+name+"'"
+    data = pd.read_sql_query(statement, connection)
+    print('\n The product is: \n')
+    print(data)
 
 def setOrderItem(customer_id,order_id):
     pass
 
-getProductList()
+#getProductList()
+getProductByName('Jelly')
