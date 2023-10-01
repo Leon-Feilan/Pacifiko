@@ -1,6 +1,7 @@
 #importing libraries
 import pyodbc
 import pandas as pd
+from datetime import date #importing date
 
 #querying drivers
 #print(pyodbc.drivers())
@@ -26,8 +27,14 @@ def getProductByName(name):
     print('\n The product is: \n')
     print(data)
 
-def setOrderItem(customer_id,order_id):
-    pass
+def setOrder(customer_id):
+    #data = pd.read_sql_query("SELECT * FROM dbo.Orders", connection)
+    statement = "INSERT INTO dbo.Orders VALUES ("+ str(len(data)+2) + ","+str(customer_id)+","+"'"+str(date.today())+"')"
+    ##pd.read_sql_query wouldn't work with inserting values, so we need to use a cursor (something simmilar to a pointer)
+    connection.cursor().execute(statement)
+    data = pd.read_sql_query("SELECT * FROM dbo.Orders", connection)
+    #print(data)
 
 #getProductList()
-getProductByName('Jelly')
+#getProductByName('Jelly')
+setOrder(3)
